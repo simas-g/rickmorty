@@ -5,10 +5,9 @@ export class FairRandomGenerator {
     this.secretKey = crypto.randomBytes(32).toString('hex');
   }
   getSecretMortyValue(range) {
-    const randomBytes = crypto.randomBytes(32);
-    const randomNumber = randomBytes.readUInt32BE(0);
-    return randomNumber % range;
+    return crypto.randomInt(0, range);
   }
+  
   generateHmac(mortyValue) {
     const hmac = crypto.createHmac('sha3-256', this.secretKey);
     hmac.update(String(mortyValue));
